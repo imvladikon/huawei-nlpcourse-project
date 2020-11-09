@@ -1,1 +1,1 @@
-# he_data
+Hebrew texts, news article, only for research purpose!!! 
