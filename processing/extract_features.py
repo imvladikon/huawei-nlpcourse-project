@@ -1,10 +1,7 @@
 import argparse
-import json
-import logging
-import os
-import gc
-import torch
 from torchsummary import summary
+
+import const
 from processing.gru_ae import GRUAE
 from utils import *
 
@@ -64,7 +61,7 @@ if __name__ == '__main__':
     parser.add_argument("--no-cuda", action='store_true', help="Whether not to use CUDA when available")
     parser.add_argument('--seed',
                         type=int,
-                        default=1203,
+                        default=const.global_seed,
                         help="random seed for initialization")
 
     args = parser.parse_args()

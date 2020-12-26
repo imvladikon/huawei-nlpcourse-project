@@ -94,7 +94,7 @@ def main(config, resume, device, nni_params=None):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Structmed Trainer')
+    parser = argparse.ArgumentParser(description='Trainer')
     parser.add_argument('-c', '--config', default='None', type=str,
                         help='config file path (default: None)')
     parser.add_argument('-r', '--resume', default=None, type=str,
@@ -102,7 +102,7 @@ if __name__ == '__main__':
     parser.add_argument("--no-cuda", action='store_true', help="Whether not to use CUDA when available")
     parser.add_argument('--seed',
                         type=int,
-                        default=1203,
+                        default=42,
                         help="random seed for initialization")
 
     args = parser.parse_args()

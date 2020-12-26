@@ -59,7 +59,6 @@ class HebrewNewsDataset(Dataset):
                                             return_attention_mask=True,
                                             max_length=self.max_length,
                                             pad_to_max_length=True,
-                                            is_pretokenized=False,
                                             truncation=True)
         return {
             "input_ids": record["input_ids"],
@@ -107,11 +106,11 @@ def pooling_mean(t: torch.Tensor):
 
 class BertEmbeddingLayer(torch.nn.Module):
 
-    def __init__(self, model: BertModel,
+    def __init__(self, bert: BertModel,
                  transform=None,
                  device=const.device):
         super(BertEmbeddingLayer, self).__init__()
-        self.model = model
+        self.bert = bert
         self.transform = transform
         self.device = device
 
@@ -122,18 +121,17 @@ class BertEmbeddingLayer(torch.nn.Module):
             self.device = args[0]
         return self
 
+    @torch.no_grad()
     def forward(self, input_ids, attention_mask):
-        with torch.no_grad():
-            # last_hidden_state
-            _, pooled_output = self.model(input_ids, attention_mask=attention_mask)
+        out = self.bert(input_ids, attention_mask=attention_mask)
+        # out:Dict[] - last_hidden_state, pooler_output
+        if isinstance(out, tuple):
+            _, pooled_output = out
+        else:
+            pooled_output = out['pooler_output']
         if self.transform:
             pooled_output = self.transform(pooled_output)
         return pooled_output
-
-
-
-
-
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Creating Tokens and Embeddings from Text')
@@ -191,7 +189,7 @@ if __name__ == '__main__':
     print("max len of the tokens {} is {} ".format(args.column_name, max_seq_len_text))
     max_len = max_position_embeddings * max_seq_len_text
     # embedding_layer = BertEmbeddingLayer(model, transform=torch.nn.Dropout(p=0.3)).to(device)
-    embedding_layer = BertEmbeddingLayer(model).to(device)
+    embedding_layer = BertEmbeddingLayer(bert=model).to(device)
     data_loader = HebrewNewsDataset.from_data(in_data[[args.column_name]].values, tokenizer,
                                               max_length=max_len, batch_size=args.batch_size)
     data_size = len(in_data)

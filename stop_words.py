@@ -1,5 +1,4 @@
 
-
 STOP_WORDS = set(
     """
 אני

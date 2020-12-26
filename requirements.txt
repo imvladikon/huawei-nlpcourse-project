@@ -5,3 +5,4 @@ sentence-transformers
 torchsummary
 GPUtil
 nni
+hickle

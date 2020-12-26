@@ -214,7 +214,8 @@ class TextDataLoader(BaseDataLoader):
     """
 
     def __init__(self, info_data_filename, text, batch_size, shuffle, validation_split, num_workers, do_train=True, **kwargs):
-        self.info_data_filename = os.path.expanduser(expand_vars(info_data_filename))
+        # self.info_data_filename = os.path.expanduser(expand_vars(info_data_filename))
+        self.info_data_filename = os.path.expanduser(info_data_filename)
         self.text = text
         self.batch_size = batch_size
         self.do_train = do_train
