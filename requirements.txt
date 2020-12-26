@@ -1,0 +1,7 @@
+torch
+torchtext
+transformers
+sentence-transformers
+torchsummary
+GPUtil
+nni
