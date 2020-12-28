@@ -1,7 +1,6 @@
 import unicodedata
 from typing import List
-import regex as re
-from stop_words import STOP_WORDS
+from utils.stop_words import STOP_WORDS
 import regex as re
 import string
 

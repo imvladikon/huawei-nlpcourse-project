@@ -1,19 +1,14 @@
 from collections import defaultdict
-from typing import List
-
+from typing import List, Union
 
 from tqdm import tqdm
 import numpy as np
-import pandas as pd
 
-from string_utils import preprocessing
+from utils.string_utils import preprocessing
 from tokenizer import HebTokenizer
 
 
-def preprocess_text(in_path:str, text_col:str)-> List:
-    f = open(in_path, 'r')
-    texts = pd.read_csv(in_path)[text_col].values
-
+def preprocess_text(texts:Union[np.ndarray, List])-> List:
     heb_tokenizer = HebTokenizer()
 
     result = []
