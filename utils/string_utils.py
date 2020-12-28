@@ -1,5 +1,6 @@
 import unicodedata
-
+from typing import List
+import regex as re
 from stop_words import STOP_WORDS
 import regex as re
 import string
@@ -19,3 +20,8 @@ def preprocessing(line):
     line = re.sub(r"[{}]".format(punctuation), " ", line)
     line = " ".join(t for t in line.split(" ") if t not in STOP_WORDS)
     return strip_accents(line).strip()
+
+NUM_RE = re.compile('^[+-]?[0-9]+\.?[0-9]*$')
+
+def remove_numbers(texts:List):
+    return list(map(lambda t: '<num>' if NUM_RE.match(t) else t, texts))

@@ -8,3 +8,4 @@ nni
 hickle
 hdbscan
 umap-learn
+unidecode

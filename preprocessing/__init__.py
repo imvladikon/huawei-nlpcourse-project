@@ -2,7 +2,7 @@ from torch.utils.data import Dataset, DataLoader
 from transformers import AutoTokenizer, PreTrainedTokenizer
 
 from const import default_bert_model
-from string_utils import strip_accents
+from utils.string_utils import strip_accents
 
 
 class HebrewNewsDataset(Dataset):
