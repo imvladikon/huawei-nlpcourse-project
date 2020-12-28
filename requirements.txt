@@ -6,3 +6,5 @@ torchsummary
 GPUtil
 nni
 hickle
+hdbscan
+umap-learn

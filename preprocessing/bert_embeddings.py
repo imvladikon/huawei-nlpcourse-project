@@ -1,16 +1,7 @@
 import argparse
-import gc
-from typing import List, Union
-import numpy as np
-import torch
 import torch.nn.functional as F
 import tqdm as tqdm
-from torch.utils.data import TensorDataset, DataLoader, Dataset
-from transformers import BertTokenizer, BertModel, BertTokenizer, BertTokenizerFast
-import os
-import pandas as pd
-from tqdm import tqdm
-import regex as re
+from transformers import BertModel, BertTokenizer, BertTokenizerFast
 from utils import *
 import json
 import shutil
@@ -33,7 +24,6 @@ from torch.utils.data import Dataset, DataLoader
 from transformers import AutoTokenizer, PreTrainedTokenizer
 
 from const import default_bert_model
-from preprocessing.string_utils import strip_accents
 
 
 class HebrewNewsDataset(Dataset):
