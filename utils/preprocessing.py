@@ -5,7 +5,7 @@ from tqdm import tqdm
 import numpy as np
 
 from utils.string_utils import preprocessing
-from tokenizer import HebTokenizer
+from utils.tokenizer import HebTokenizer
 
 
 def preprocess_text(texts:Union[np.ndarray, List])-> List:
@@ -61,4 +61,3 @@ if __name__ == '__main__':
     texts = preprocess_text("../data/news_sample.csv", "articleBody")
     vocab = Vocab(texts).save("vocab.vocab")
 
-    i = 42
